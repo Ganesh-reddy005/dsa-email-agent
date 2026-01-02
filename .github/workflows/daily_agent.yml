@@ -1,0 +1,31 @@
+name: Daily DSA Email Agent
+
+on:
+  schedule:
+    - cron: "0 6 * * *"   # 6 AM UTC
+  workflow_dispatch:     # allows manual run
+
+jobs:
+  run-agent:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run DSA Agent
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          SENDER_MAIL: ${{ secrets.SENDER_MAIL }}
+          APP_PASSWORD: ${{ secrets.APP_PASSWORD }}
+        run: |
+          python agent.py
