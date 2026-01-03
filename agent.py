@@ -21,8 +21,12 @@ def run_agent():
               body=body,
               sender_acc=os.getenv('SENDER_MAIL'),
               app_password=os.getenv('APP_PASSWORD'),
-              recp_acc='b.ganesh.reddy.05@gmail.com'
+              recp_acc=['b.ganesh.reddy.05@gmail.com',
+                        'jeevaninn@gmail.com',
+                        'gkmamarnath@gmail.com',
+                        'karthikam3178@gmail.com']
     )
+    
 
 if __name__=='__main__':
     run_agent()
